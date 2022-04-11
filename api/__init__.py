@@ -11,6 +11,7 @@ from api.models.animood import Animood
 
 # ============ Import Views ============
 from api.views.auth import auth
+from api.views.animoods import animoods
 
 cors = CORS()
 migrate = Migrate() 
@@ -25,7 +26,8 @@ def create_app(config):
   cors.init_app(app, supports_credentials=True, methods=list)
 
   # ============ Register Blueprints ============
-  app.register_blueprint(auth, url_prefix='/api/auth') 
+  app.register_blueprint(auth, url_prefix='/api/auth')
+  app.register_bluepring(animoods, url_prefix='/api/animoods') 
 
   return app
 
