@@ -27,3 +27,19 @@ def show(id):
   animood = Animood.query.filter_by(id=id).first()
   animood_data = animood.serialize()
   return jsonify(animood=animood_data), 200
+
+@animoods.route('/<id>', method=["PUT"])
+@login_required
+def update(id):
+  data = request.get_json()
+  profile = read_token(request)
+  animood = Animood.query.filter_by(id=id).first()
+
+  if animood.profile_id != profile["id"]:
+    return 'Forbidden', 403
+
+  for key in data:
+    setattr(animood, key, data[key])
+
+  db.session.commit()
+  return jsonify(animood.serialize()), 200
