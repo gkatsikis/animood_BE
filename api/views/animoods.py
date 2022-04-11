@@ -16,3 +16,8 @@ def create():
   db.session.add(animood)
   db.session.commit()
   return jsonify(animood.serialize()), 201
+
+@animoods.route('/', methods=["GET"])
+def index():
+  animoods = Animood.query.all()
+  return jsonify([animood.serialize() for animood in animoods]), 200

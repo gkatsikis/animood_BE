@@ -27,7 +27,7 @@ def create_app(config):
 
   # ============ Register Blueprints ============
   app.register_blueprint(auth, url_prefix='/api/auth')
-  app.register_bluepring(animoods, url_prefix='/api/animoods') 
+  app.register_blueprint(animoods, url_prefix='/api/animoods') 
 
   return app
 
