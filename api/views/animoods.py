@@ -28,7 +28,7 @@ def show(id):
   animood_data = animood.serialize()
   return jsonify(animood=animood_data), 200
 
-@animoods.route('/<id>', method=["PUT"])
+@animoods.route('/<id>', methods=["PUT"])
 @login_required
 def update(id):
   data = request.get_json()
@@ -43,3 +43,16 @@ def update(id):
 
   db.session.commit()
   return jsonify(animood.serialize()), 200
+
+@animoods.route('/<id>', methods=["DELETE"])
+@login_required
+def delete(id):
+  profile = read_token(request)
+  animood = Animood.query.filter_by(id=id).first()
+
+  if animood.profile_id != profile["id"]:
+    return 'Forbidden', 403
+
+  db.session.delete(animood)
+  db.session.commit()
+  return jsonify(message="Success"), 200
