@@ -7,6 +7,7 @@ from config import Config
 # ============ Import Models ============
 from api.models.user import User
 from api.models.profile import Profile
+from api.models.animood import Animood
 
 # ============ Import Views ============
 from api.views.auth import auth

@@ -8,6 +8,10 @@ class Profile(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    animoods = db.relationship("Animood", backref='author', lazy=True)
+
     def serialize(self):
-      profile = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+      profile = {a.name: getattr(self, a.name) for a in self.__table__.columns}
+      # animoods = [animoods.serialize() for animood in self.animoods]
+      # profile['animoods'] = animoods
       return profile
