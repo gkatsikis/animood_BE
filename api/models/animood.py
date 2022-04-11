@@ -8,3 +8,5 @@ class Animood(db.Model):
   theme = db.Column(db.String(100))
   episode = db.Column(db.String(100))
   story = db.Column(db.String(250))
+  created_at = db.Column(db.DateTime, default=datetime.utcnow)
+  profile_id = db.Column(db.Integer, db.ForeignKey('proifles.id'))
