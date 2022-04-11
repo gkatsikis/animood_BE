@@ -15,3 +15,4 @@ class Profile(db.Model):
       # animoods = [animoods.serialize() for animood in self.animoods]
       # profile['animoods'] = animoods
       return profile
+

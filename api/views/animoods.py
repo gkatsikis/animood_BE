@@ -6,7 +6,7 @@ from api.models.animood import Animood
 
 animoods = Blueprint('animoods', 'animoods')
 
-@animoods.route('/', methods=["POST"])
+@animoods.route('/', methods=["POST"])              #CREATE
 @login_required
 def create():
   data = request.get_json()
@@ -17,18 +17,18 @@ def create():
   db.session.commit()
   return jsonify(animood.serialize()), 201
 
-@animoods.route('/', methods=["GET"])
+@animoods.route('/', methods=["GET"])                 #INDEX
 def index():
   animoods = Animood.query.all()
   return jsonify([animood.serialize() for animood in animoods]), 200
 
-@animoods.route('/<id>', methods=["GET"])
+@animoods.route('/<id>', methods=["GET"])             #SHOW
 def show(id):
   animood = Animood.query.filter_by(id=id).first()
   animood_data = animood.serialize()
   return jsonify(animood=animood_data), 200
 
-@animoods.route('/<id>', methods=["PUT"])
+@animoods.route('/<id>', methods=["PUT"])             #UPDATE
 @login_required
 def update(id):
   data = request.get_json()
@@ -44,7 +44,7 @@ def update(id):
   db.session.commit()
   return jsonify(animood.serialize()), 200
 
-@animoods.route('/<id>', methods=["DELETE"])
+@animoods.route('/<id>', methods=["DELETE"])          #DELETE
 @login_required
 def delete(id):
   profile = read_token(request)
