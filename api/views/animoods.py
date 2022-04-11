@@ -21,3 +21,9 @@ def create():
 def index():
   animoods = Animood.query.all()
   return jsonify([animood.serialize() for animood in animoods]), 200
+
+@animoods.route('/<id>', methods=["GET"])
+def show(id):
+  animood = Animood.query.filter_by(id=id).first()
+  animood_data = animood.serialize()
+  return jsonify(animood=animood_data), 200
