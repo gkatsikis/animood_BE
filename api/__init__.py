@@ -12,6 +12,7 @@ from api.models.animood import Animood
 # ============ Import Views ============
 from api.views.auth import auth
 from api.views.animoods import animoods
+from api.views.profiles import profiles
 
 cors = CORS()
 migrate = Migrate() 
@@ -27,7 +28,8 @@ def create_app(config):
 
   # ============ Register Blueprints ============
   app.register_blueprint(auth, url_prefix='/api/auth')
-  app.register_blueprint(animoods, url_prefix='/api/animoods') 
+  app.register_blueprint(animoods, url_prefix='/api/animoods')
+  app.register_blueprint(profiles, url_prefix='/api/profiles') 
 
   return app
 
